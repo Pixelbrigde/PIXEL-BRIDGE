@@ -1,1 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PixelBridge — Websites That Convert</title>
+<meta name="description" content="PixelBridge builds fast, modern, mobile-friendly websites for businesses worldwide. Launch in days, not months." />
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --surface:#12121a;
+    --surface2:#1a1a25;
+    --border:#25252f;
+    --primary:#4f7cff;
+    --primary2:#7a5cff;
+    --accent:#00d4aa;
+    --text:#e8e8ef;
+    --muted:#8a8aa0;
+    --radius:14px;
+    --max:1100px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,10,15,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;max-width:var(--max);margin:0 auto;
+  }
+  .logo{
+    font-weight:700;font-size:1.15rem;letter-spacing:-.02em;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+  }
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-size:.92rem;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{
+    background:var(--primary);color:#fff!important;
+    padding:8px 16px;border-radius:10px;font-weight:600;
+  }
+  .nav-cta:hover{background:#3f6aeb}
+  .burger{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+
+  @media(max-width:760px){
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+      max-height:0;overflow:hidden;transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:400px}
+    .nav-links a{padding:14px 20px;width:100%;border-top:1px solid var(--border)}
+    .nav-cta{margin:10px 20px;text-align:center}
+    .burger{display:block}
+  }
+
+  /* HERO */
+  .hero{
+    padding:90px 0 70px;text-align:center;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);
+    width:800px;height:800px;
+    background:radial-gradient(circle,rgba(79,124,255,.18),transparent 60%);
+    pointer-events:none;
+  }
+  .badge{
+    display:inline-block;padding:6px 14px;border-radius:999px;
+    background:var(--surface2);border:1px solid var(--border);
+    font-size:.8rem;color:var(--muted);margin-bottom:22px;
+  }
+  .badge span{color:var(--accent)}
+  h1{
+    font-size:clamp(2rem,5.5vw,3.4rem);
+    line-height:1.1;letter-spacing:-.03em;font-weight:800;
+    margin-bottom:20px;
+  }
+  .grad{
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{
+    color:var(--muted);font-size:1.05rem;max-width:560px;margin:0 auto 34px;
+  }
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-block;padding:13px 26px;border-radius:12px;
+    font-weight:600;font-size:.95rem;transition:transform .2s,background .2s;
+    cursor:pointer;border:none;font-family:inherit;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;
+  }
+  .btn-primary:hover{transform:translateY(-2px)}
+  .btn-ghost{
+    background:var(--surface);border:1px solid var(--border);color:var(--text);
+  }
+  .btn-ghost:hover{background:var(--surface2)}
+
+  /* STATS */
+  .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    max-width:720px;margin:60px auto 0;padding:0 20px;
+  }
+  .stat{text-align:center}
+  .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--text)}
+  .stat span{font-size:.82rem;color:var(--muted)}
+  @media(max-width:600px){.stats{grid-template-columns:1fr;gap:26px}}
+
+  /* SECTIONS */
+  section{padding:80px 0}
+  .section-head{text-align:center;margin-bottom:52px}
+  .section-head h2{
+    font-size:clamp(1.6rem,3.5vw,2.3rem);
+    letter-spacing:-.02em;font-weight:800;margin-bottom:12px;
+  }
+  .section-head p{color:var(--muted);max-width:520px;margin:0 auto}
+
+  /* SERVICES */
+  .grid{display:grid;gap:20px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.grid-3,.grid-4{grid-template-columns:1fr}}
+
+  .card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:28px 24px;
+    transition:border-color .25s,transform .25s;
+  }
+  .card:hover{border-color:var(--primary);transform:translateY(-3px)}
+  .card-icon{
+    width:42px;height:42px;border-radius:11px;
+    background:linear-gradient(135deg,rgba(79,124,255,.2),rgba(0,212,170,.15));
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;margin-bottom:16px;
+  }
+  .card h3{font-size:1.05rem;margin-bottom:8px;font-weight:700}
+  .card p{color:var(--muted);font-size:.9rem}
+
+  /* PROCESS */
+  .step{display:flex;gap:18px;align-items:flex-start;margin-bottom:28px}
+  .step-num{
+    flex-shrink:0;width:36px;height:36px;border-radius:50%;
+    background:var(--surface2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:.9rem;color:var(--primary);
+  }
+  .step h4{margin-bottom:4px;font-size:1rem}
+  .step p{color:var(--muted);font-size:.9rem}
+
+  /* PRICING */
+  .price-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:30px 26px;position:relative;
+  }
+  .price-card.featured{
+    border-color:var(--primary);
+    background:linear-gradient(180deg,rgba(79,124,255,.08),var(--surface));
+  }
+  .price-card .tag{
+    position:absolute;top:-12px;left:26px;
+    background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;
+    padding:4px 12px;border-radius:999px;letter-spacing:.03em;
+  }
+  .price-card h3{font-size:1.1rem;margin-bottom:6px}
+  .price-card .price{font-size:2rem;font-weight:800;margin:14px 0 4px}
+  .price-card .price small{font-size:.85rem;color:var(--muted);font-weight:500}
+  .price-card ul{list-style:none;margin:20px 0 24px}
+  .price-card li{
+    padding:7px 0;font-size:.9rem;color:var(--muted);
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .price-card li::before{content:"✓";color:var(--accent);font-weight:700}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-q{
+    width:100%;background:none;border:none;color:var(--text);
+    text-align:left;padding:20px 0;font-size:1rem;font-weight:600;
+    cursor:pointer;display:flex;justify-content:space-between;gap:16px;
+    font-family:inherit;
+  }
+  .faq-q .plus{color:var(--primary);font-size:1.4rem;transition:transform .3s;flex-shrink:0}
+  .faq-item.open .plus{transform:rotate(45deg)}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .35s ease;
+    color:var(--muted);font-size:.93rem;
+  }
+  .faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:40px 32px;max-width:560px;margin:0 auto;
+  }
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:.85rem;margin-bottom:7px;color:var(--muted)}
+  .field input,.field textarea,.field select{
+    width:100%;padding:13px 15px;background:var(--bg);
+    border:1px solid var(--border);border-radius:10px;
+    color:var(--text);font-size:.95rem;font-family:inherit;
+    transition:border-color .2s;
+  }
+  .field input:focus,.field textarea:focus,.field select:focus{
+    outline:none;border-color:var(--primary);
+  }
+  .field textarea{resize:vertical;min-height:110px}
+  .contact-box .btn{width:100%;margin-top:6px}
+
+  /* FOOTER */
+  footer{
+    border-top:1px solid var(--border);padding:36px 0;text-align:center;
+    color:var(--muted);font-size:.85rem;
+  }
+  footer a{color:var(--primary)}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo"><span class="logo-dot"></span>PixelBridge</a>
+    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="badge">🌍 Serving clients in <span>US · UK · UAE · India</span></div>
+    <h1>Websites that <span class="grad">convert visitors into customers</span></h1>
+    <p>PixelBridge designs and builds fast, modern, mobile-first websites for small businesses worldwide. Launch in days — not months.</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      <a href="#services" class="btn btn-ghost">See Services</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>3–7 days</b><span>Typical delivery</span></div>
+    <div class="stat"><b>100% mobile</b><span>Responsive by default</span></div>
+    <div class="stat"><b>Fixed price</b><span>No surprises</span></div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>What we build</h2>
+      <p>Everything a small business needs to look credible online — nothing you don't.</p>
+    </div>
+    <div class="grid grid-4">
+      <div class="card reveal">
+        <div class="card-icon">🎨</div>
+        <h3>Business Websites</h3>
+        <p>5–7 page sites for local businesses, consultants, and startups.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🛒</div>
+        <h3>Landing Pages</h3>
+        <p>High-converting single pages for ads, launches, and campaigns.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">⚡</div>
+        <h3>Speed & SEO Fixes</h3>
+        <p>Make an existing slow site fast and Google-friendly.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔧</div>
+        <h3>Care Plans</h3>
+        <p>Monthly updates, backups, and small edits — recurring revenue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>How it works</h2>
+      <p>Simple, transparent, and built for busy business owners.</p>
+    </div>
+    <div style="max-width:640px;margin:0 auto">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div><h4>Free discovery call</h4><p>You tell us your goal, budget, and timeline. We confirm scope in writing.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div><h4>50% deposit</h4><p>We start work only after the first payment. No deposit, no work — this protects both sides.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div><h4>Design & build</h4><p>You get a preview link. Two rounds of revisions included.</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div><h4>Launch & handover</h4><p>Final 50% releases the files. Optional care plan begins.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Simple pricing</h2>
+      <p>Fixed prices in USD. 50% upfront, 50% on delivery. No hidden fees.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="price-card reveal">
+        <h3>Starter</h3>
+        <div class="price">$149 <small>one-time</small></div>
+        <ul>
+          <li>1-page landing site</li>
+          <li>Mobile responsive</li>
+          <li>Contact form</li>
+          <li>3-day delivery</li>
+          <li>1 revision round</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Start</a>
+      </div>
+      <div class="price-card featured reveal">
+        <span class="tag">MOST POPULAR</span>
+        <h3>Business</h3>
+        <div class="price">$349 <small>one-time</small></div>
+        <ul>
+          <li>Up to 6 pages</li>
+          <li>Custom design</li>
+          <li>SEO basics</li>
+          <li>Contact + WhatsApp</li>
+          <li>5–7 day delivery</li>
+          <li>2 revision rounds</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="width:100%;text-align:center">Start</a>
+      </div>
+      <div class="price-card reveal">
+        <h3>Care Plan</h3>
+        <div class="price">$29 <small>/ month</small></div>
+        <ul>
+          <li>Hosting managed</li>
+          <li>Monthly backups</li>
+          <li>Small edits</li>
+          <li>Uptime monitoring</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="wrap" style="max-width:720px">
+    <div class="section-head reveal">
+      <h2>Questions</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-q">How do I pay? <span class="plus">+</span></button>
+        <div class="faq-a"><p>50% deposit before work begins, 50% on delivery. We accept PayPal, Wise, and bank transfer. You're never asked to pay the full amount upfront.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What if I don't like the design? <span class="plus">+</span></button>
+        <div class="faq-a"><p>You get revision rounds included. If we can't get it right after those, we refund the deposit minus any work already delivered.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you handle hosting? <span class="plus">+</span></button>
+        <div class="faq-a"><p>We deploy to free or low-cost hosting (GitHub Pages, Netlify, or your existing host). If you want us to manage it, the Care Plan covers that.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How fast can you start? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Usually within 24–48 hours of deposit for Starter and Business plans.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Get a free quote</h2>
+      <p>Tell us about your project. We reply within 24 hours.</p>
+    </div>
+    <div class="contact-box reveal">
+      <!-- Replace YOUR_FORM_ID with your free Formspree ID (see Part 2) -->
+      <form id="contactForm" action="https://formspree.io/f/aditya.009016@gmail.com" method="POST">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="field">
+          <label for="budget">Budget</label>
+          <select id="budget" name="budget">
+            <option>Under $200</option>
+            <option>$200 – $500</option>
+            <option>$500 – $1500</option>
+            <option>$1500+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Project details</label>
+          <textarea id="message" name="message" required placeholder="What do you need? Any deadline?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p id="formMsg" style="text-align:center;margin-top:14px;font-size:.88rem;color:var(--accent);display:none">Thanks! We'll reply within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> PixelBridge. Built with care.</p>
+    <p style="margin-top:6px">Email: <a href="mailto:hello@pixelbridge.site">hello@pixelbridge.site</a></p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  var burger = document.getElementById('burger');
+  var navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement;
+      var open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Form AJAX submit (works with Formspree)
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var msg = document.getElementById('formMsg');
+    var data = new FormData(form);
+    fetch(form.action, {
+      method:'POST',
+      body:data,
+      headers:{'Accept':'application/json'}
+    }).then(function(r){
+      if(r.ok){
+        form.reset();
+        msg.style.display = 'block';
+      } else {
+        alert('Something went wrong. Please email us directly.');
+      }
+    }).catch(function(){
+      alert('Network error. Please email us directly.');
+    });
+  });
+</script>
+</body>
+</html>
