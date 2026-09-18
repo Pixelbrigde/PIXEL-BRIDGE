@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PixelBridge — Websites That Convert</title>
-<meta name="description" content="PixelBridge builds fast, modern, mobile-friendly websites for businesses worldwide. Launch in days, not months." />
+<title>WebBridge — Websites That Convert</title>
+<meta name="description" content="WebBridge builds fast, modern, mobile-friendly websites for businesses worldwide. Launch in days, not months." />
 <style>
   :root{
     --bg:#0a0a0f;
@@ -245,7 +245,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo"><span class="logo-dot"></span>PixelBridge</a>
+    <a href="#" class="logo"><span class="logo-dot"></span>WebBridge</a>
     <button class="burger" id="burger" aria-label="Menu">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#services">Services</a>
@@ -262,7 +262,7 @@
   <div class="wrap">
     <div class="badge">🌍 Serving clients in <span>US · UK · UAE · India</span></div>
     <h1>Websites that <span class="grad">convert visitors into customers</span></h1>
-    <p>PixelBridge designs and builds fast, modern, mobile-first websites for small businesses worldwide. Launch in days — not months.</p>
+    <p>WebBridge designs and builds fast, modern, mobile-first websites for small businesses worldwide. Launch in days — not months.</p>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
       <a href="#services" class="btn btn-ghost">See Services</a>
@@ -420,8 +420,8 @@
       <p>Tell us about your project. We reply within 24 hours.</p>
     </div>
     <div class="contact-box reveal">
-      <!-- Replace mkjggewa with your free Formspree ID (see Part 2) -->
-      form action="https://formsubmit.co/contact.pixelbridge77@gmail.com" method="POST">
+      <!-- FormSubmit Integration -->
+      <form action="https://formsubmit.co/contact.pixelbridge77@gmail.com" method="POST">
         <div class="field">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" required />
@@ -444,7 +444,6 @@
           <textarea id="message" name="message" required placeholder="What do you need? Any deadline?"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send Message</button>
-        <p id="formMsg" style="text-align:center;margin-top:14px;font-size:.88rem;color:var(--accent);display:none">Thanks! We'll reply within 24 hours.</p>
       </form>
     </div>
   </div>
@@ -452,12 +451,12 @@
 
 <footer>
   <div class="wrap">
-    <p>© <span id="year"></span> PixelBridge. Built with care.</p>
+    <p>© <span id="year"></span> WebBridge. Built with care.</p>
     <p style="margin-top:6px">Email: <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a></p>
   </div>
 </footer>
 
-<!--<script>
+<script>
   // Mobile menu
   var burger = document.getElementById('burger');
   var navLinks = document.getElementById('navLinks');
@@ -488,28 +487,6 @@
     });
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
-
-  // Form AJAX submit (works with Formspree)
-  var form = document.getElementById('contactForm');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var msg = document.getElementById('formMsg');
-    var data = new FormData(form);
-    fetch(form.action, {
-      method:'POST',
-      body:data,
-      headers:{'Accept':'application/json'}
-    }).then(function(r){
-      if(r.ok){
-        form.reset();
-        msg.style.display = 'block';
-      } else {
-        alert('Something went wrong. Please email us directly.');
-      }
-    }).catch(function(){
-      alert('Network error. Please email us directly.');
-    });
-  });
-</script>-->
+</script>
 </body>
 </html>
