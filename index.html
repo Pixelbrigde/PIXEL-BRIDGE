@@ -3,38 +3,86 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a0a0f" />
 <title>WebBridge — Websites That Convert</title>
-<meta name="description" content="WebBridge builds fast, modern, mobile-friendly websites for businesses worldwide. Launch in days, not months." />
+<meta name="description" content="WebBridge builds fast, modern, mobile-friendly websites for small businesses worldwide." />
+<meta name="author" content="Aditya Baman" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="WebBridge — Websites That Convert" />
+<meta property="og:description" content="Fast, modern, mobile-first websites for small businesses worldwide." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://pixelbrigde.github.io/PIXEL-BRIDGE/" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="WebBridge — Websites That Convert" />
+<meta name="twitter:description" content="Fast, modern, mobile-first websites for small businesses worldwide." />
+
+<!-- Favicon (inline SVG, no external file needed) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%236b93ff'/></svg>" />
+
+<!-- Silktide Consent Manager -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@silktide/consent-manager@2/dist/silktide-consent-manager.css">
+
 <style>
   :root{
     --bg:#0a0a0f;
     --surface:#12121a;
     --surface2:#1a1a25;
-    --border:#25252f;
-    --primary:#4f7cff;
-    --primary2:#7a5cff;
+    --border:#3d3d4d;
+    --primary:#6b93ff;
+    --primary2:#8a70ff;
     --accent:#00d4aa;
-    --text:#e8e8ef;
-    --muted:#8a8aa0;
+    --text:#f0f0f5;
+    --muted:#a0a0b8;
     --radius:14px;
     --max:1100px;
+    --success:#4ade80;
+    --warning:#fbbf24;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
 
-  /* NAV */
+  /* Skip link */
+  .skip-link{
+    position:absolute;top:-100px;left:0;
+    background:var(--primary);color:#fff;
+    padding:12px 20px;z-index:1000;
+    border-radius:0 0 10px 0;font-weight:600;
+  }
+  .skip-link:focus{top:0}
+
+  /* Visible focus indicator */
+  :focus-visible{
+    outline:3px solid var(--primary);
+    outline-offset:2px;
+  }
+
+  /* Screen-reader only */
+  .sr-only{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+  }
+
   nav{
     position:sticky;top:0;z-index:50;
-    background:rgba(10,10,15,.85);
+    background:rgba(10,10,15,.92);
     backdrop-filter:blur(12px);
     border-bottom:1px solid var(--border);
   }
@@ -57,8 +105,12 @@
     background:var(--primary);color:#fff!important;
     padding:8px 16px;border-radius:10px;font-weight:600;
   }
-  .nav-cta:hover{background:#3f6aeb}
-  .burger{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+  .nav-cta:hover{background:#5a82f0}
+  .burger{
+    display:none;background:none;border:none;color:var(--text);
+    font-size:1.5rem;cursor:pointer;padding:8px;
+    min-width:44px;min-height:44px;
+  }
 
   @media(max-width:760px){
     .nav-links{
@@ -74,14 +126,13 @@
     .burger{display:block}
   }
 
-  /* HERO */
   .hero{
     padding:90px 0 70px;text-align:center;position:relative;overflow:hidden;
   }
   .hero::before{
     content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);
     width:800px;height:800px;
-    background:radial-gradient(circle,rgba(79,124,255,.18),transparent 60%);
+    background:radial-gradient(circle,rgba(107,147,255,.18),transparent 60%);
     pointer-events:none;
   }
   .badge{
@@ -107,6 +158,7 @@
     display:inline-block;padding:13px 26px;border-radius:12px;
     font-weight:600;font-size:.95rem;transition:transform .2s,background .2s;
     cursor:pointer;border:none;font-family:inherit;
+    min-height:44px;text-align:center;
   }
   .btn-primary{
     background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;
@@ -117,7 +169,6 @@
   }
   .btn-ghost:hover{background:var(--surface2)}
 
-  /* STATS */
   .stats{
     display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
     max-width:720px;margin:60px auto 0;padding:0 20px;
@@ -127,7 +178,6 @@
   .stat span{font-size:.82rem;color:var(--muted)}
   @media(max-width:600px){.stats{grid-template-columns:1fr;gap:26px}}
 
-  /* SECTIONS */
   section{padding:80px 0}
   .section-head{text-align:center;margin-bottom:52px}
   .section-head h2{
@@ -136,7 +186,6 @@
   }
   .section-head p{color:var(--muted);max-width:520px;margin:0 auto}
 
-  /* SERVICES */
   .grid{display:grid;gap:20px}
   .grid-3{grid-template-columns:repeat(3,1fr)}
   .grid-4{grid-template-columns:repeat(4,1fr)}
@@ -151,14 +200,13 @@
   .card:hover{border-color:var(--primary);transform:translateY(-3px)}
   .card-icon{
     width:42px;height:42px;border-radius:11px;
-    background:linear-gradient(135deg,rgba(79,124,255,.2),rgba(0,212,170,.15));
+    background:linear-gradient(135deg,rgba(107,147,255,.2),rgba(0,212,170,.15));
     display:flex;align-items:center;justify-content:center;
     font-size:1.3rem;margin-bottom:16px;
   }
   .card h3{font-size:1.05rem;margin-bottom:8px;font-weight:700}
   .card p{color:var(--muted);font-size:.9rem}
 
-  /* PROCESS */
   .step{display:flex;gap:18px;align-items:flex-start;margin-bottom:28px}
   .step-num{
     flex-shrink:0;width:36px;height:36px;border-radius:50%;
@@ -169,14 +217,13 @@
   .step h4{margin-bottom:4px;font-size:1rem}
   .step p{color:var(--muted);font-size:.9rem}
 
-  /* PRICING */
   .price-card{
     background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius);padding:30px 26px;position:relative;
   }
   .price-card.featured{
     border-color:var(--primary);
-    background:linear-gradient(180deg,rgba(79,124,255,.08),var(--surface));
+    background:linear-gradient(180deg,rgba(107,147,255,.08),var(--surface));
   }
   .price-card .tag{
     position:absolute;top:-12px;left:26px;
@@ -191,15 +238,14 @@
     padding:7px 0;font-size:.9rem;color:var(--muted);
     display:flex;gap:10px;align-items:flex-start;
   }
-  .price-card li::before{content:"✓";color:var(--accent);font-weight:700}
+  .price-card li::before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0}
 
-  /* FAQ */
   .faq-item{border-bottom:1px solid var(--border)}
   .faq-q{
     width:100%;background:none;border:none;color:var(--text);
     text-align:left;padding:20px 0;font-size:1rem;font-weight:600;
     cursor:pointer;display:flex;justify-content:space-between;gap:16px;
-    font-family:inherit;
+    font-family:inherit;min-height:44px;
   }
   .faq-q .plus{color:var(--primary);font-size:1.4rem;transition:transform .3s;flex-shrink:0}
   .faq-item.open .plus{transform:rotate(45deg)}
@@ -209,7 +255,6 @@
   }
   .faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
 
-  /* CONTACT */
   .contact-box{
     background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius);padding:40px 32px;max-width:560px;margin:0 auto;
@@ -228,25 +273,69 @@
   .field textarea{resize:vertical;min-height:110px}
   .contact-box .btn{width:100%;margin-top:6px}
 
-  /* FOOTER */
+  .consent-row{
+    display:flex;gap:10px;align-items:flex-start;
+    font-size:.88rem;color:var(--muted);
+    margin-top:4px;margin-bottom:18px;
+  }
+  .consent-row input[type="checkbox"]{
+    width:18px;height:18px;min-width:18px;
+    margin-top:3px;cursor:pointer;
+    accent-color:var(--primary);
+  }
+  .consent-row a{color:var(--primary);text-decoration:underline}
+
   footer{
-    border-top:1px solid var(--border);padding:36px 0;text-align:center;
+    border-top:1px solid var(--border);padding:36px 0 90px;text-align:center;
     color:var(--muted);font-size:.85rem;
   }
   footer a{color:var(--primary)}
+  .footer-links{
+    display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
+    margin-bottom:14px;
+  }
+  .footer-links a{font-size:.85rem}
 
-  /* REVEAL */
+  .policy{
+    max-width:780px;margin:0 auto;padding:0 20px;
+  }
+  .policy h1{font-size:1.8rem;margin-bottom:14px}
+  .policy h2{font-size:1.2rem;margin:28px 0 10px;color:var(--text)}
+  .policy p,.policy li{color:var(--muted);font-size:.92rem;margin-bottom:10px}
+  .policy ul{padding-left:22px}
+  .policy a{color:var(--primary);text-decoration:underline}
+
+  /* Floating WhatsApp button */
+  .whatsapp-float{
+    position:fixed;bottom:20px;right:20px;z-index:40;
+    width:56px;height:56px;border-radius:50%;
+    background:#25D366;color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px rgba(0,0,0,.4);
+    transition:transform .2s;
+  }
+  .whatsapp-float:hover{transform:scale(1.08)}
+  .whatsapp-float svg{width:32px;height:32px;fill:#fff}
+
   .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
+
+  @media print{
+    nav,footer,.whatsapp-float,.cta-row,.stats{display:none}
+    body{background:#fff;color:#000}
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="#" class="logo"><span class="logo-dot"></span>WebBridge</a>
-    <button class="burger" id="burger" aria-label="Menu">☰</button>
+    <a href="#" class="logo" aria-label="WebBridge home">
+      <span class="logo-dot" aria-hidden="true"></span>WebBridge
+    </a>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#services">Services</a>
       <a href="#process">Process</a>
@@ -257,25 +346,25 @@
   </div>
 </nav>
 
-<!-- HERO -->
+<main id="main">
+
 <header class="hero">
   <div class="wrap">
-    <div class="badge">🌍 Serving clients in <span>US · UK · UAE · India</span></div>
+    <div class="badge">🌍 Serving clients worldwide <span>· US · UK · UAE · India</span></div>
     <h1>Websites that <span class="grad">convert visitors into customers</span></h1>
-    <p>WebBridge designs and builds fast, modern, mobile-first websites for small businesses worldwide. Launch in days — not months.</p>
+    <p>WebBridge designs and builds fast, modern, mobile-first websites for small businesses worldwide.</p>
     <div class="cta-row">
       <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
       <a href="#services" class="btn btn-ghost">See Services</a>
     </div>
   </div>
   <div class="stats">
-    <div class="stat"><b>3–7 days</b><span>Typical delivery</span></div>
-    <div class="stat"><b>100% mobile</b><span>Responsive by default</span></div>
-    <div class="stat"><b>Fixed price</b><span>No surprises</span></div>
+    <div class="stat"><b>Mobile-first</b><span>Every site, every screen</span></div>
+    <div class="stat"><b>Fixed price</b><span>No hidden fees</span></div>
+    <div class="stat"><b>Free quote</b><span>No obligation</span></div>
   </div>
 </header>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="wrap">
     <div class="section-head reveal">
@@ -284,30 +373,29 @@
     </div>
     <div class="grid grid-4">
       <div class="card reveal">
-        <div class="card-icon">🎨</div>
+        <div class="card-icon" aria-hidden="true">🎨</div>
         <h3>Business Websites</h3>
         <p>5–7 page sites for local businesses, consultants, and startups.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon">🛒</div>
+        <div class="card-icon" aria-hidden="true">🛒</div>
         <h3>Landing Pages</h3>
-        <p>High-converting single pages for ads, launches, and campaigns.</p>
+        <p>Focused single pages for ads, launches, and campaigns.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon">⚡</div>
-        <h3>Speed & SEO Fixes</h3>
+        <div class="card-icon" aria-hidden="true">⚡</div>
+        <h3>Speed &amp; SEO Fixes</h3>
         <p>Make an existing slow site fast and Google-friendly.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon">🔧</div>
+        <div class="card-icon" aria-hidden="true">🔧</div>
         <h3>Care Plans</h3>
-        <p>Monthly updates, backups, and small edits — recurring revenue.</p>
+        <p>Monthly updates, backups, and small edits.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section id="process" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="wrap">
     <div class="section-head reveal">
@@ -316,26 +404,25 @@
     </div>
     <div style="max-width:640px;margin:0 auto">
       <div class="step reveal">
-        <div class="step-num">1</div>
+        <div class="step-num" aria-hidden="true">1</div>
         <div><h4>Free discovery call</h4><p>You tell us your goal, budget, and timeline. We confirm scope in writing.</p></div>
       </div>
       <div class="step reveal">
-        <div class="step-num">2</div>
+        <div class="step-num" aria-hidden="true">2</div>
         <div><h4>50% deposit</h4><p>We start work only after the first payment. No deposit, no work — this protects both sides.</p></div>
       </div>
       <div class="step reveal">
-        <div class="step-num">3</div>
-        <div><h4>Design & build</h4><p>You get a preview link. Two rounds of revisions included.</p></div>
+        <div class="step-num" aria-hidden="true">3</div>
+        <div><h4>Design &amp; build</h4><p>You get a preview link. Two rounds of revisions included.</p></div>
       </div>
       <div class="step reveal">
-        <div class="step-num">4</div>
-        <div><h4>Launch & handover</h4><p>Final 50% releases the files. Optional care plan begins.</p></div>
+        <div class="step-num" aria-hidden="true">4</div>
+        <div><h4>Launch &amp; handover</h4><p>Final 50% releases the files. Optional care plan begins.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing">
   <div class="wrap">
     <div class="section-head reveal">
@@ -353,7 +440,7 @@
           <li>3-day delivery</li>
           <li>1 revision round</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Start</a>
+        <a href="#contact" class="btn btn-ghost" style="width:100%">Start</a>
       </div>
       <div class="price-card featured reveal">
         <span class="tag">MOST POPULAR</span>
@@ -367,7 +454,7 @@
           <li>5–7 day delivery</li>
           <li>2 revision rounds</li>
         </ul>
-        <a href="#contact" class="btn btn-primary" style="width:100%;text-align:center">Start</a>
+        <a href="#contact" class="btn btn-primary" style="width:100%">Start</a>
       </div>
       <div class="price-card reveal">
         <h3>Care Plan</h3>
@@ -379,40 +466,36 @@
           <li>Uptime monitoring</li>
           <li>Priority support</li>
         </ul>
-        <a href="#contact" class="btn btn-ghost" style="width:100%;text-align:center">Subscribe</a>
+        <a href="#contact" class="btn btn-ghost" style="width:100%">Subscribe</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq" style="background:var(--surface);border-top:1px solid var(--border)">
   <div class="wrap" style="max-width:720px">
-    <div class="section-head reveal">
-      <h2>Questions</h2>
-    </div>
+    <div class="section-head reveal"><h2>Questions</h2></div>
     <div class="reveal">
       <div class="faq-item">
-        <button class="faq-q">How do I pay? <span class="plus">+</span></button>
-        <div class="faq-a"><p>50% deposit before work begins, 50% on delivery. We accept PayPal, Wise, and bank transfer. You're never asked to pay the full amount upfront.</p></div>
+        <button class="faq-q" aria-expanded="false">How do I pay? <span class="plus" aria-hidden="true">+</span></button>
+        <div class="faq-a"><p>50% deposit before work begins, 50% on delivery. We accept PayPal, Wise, and bank transfer.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">What if I don't like the design? <span class="plus">+</span></button>
+        <button class="faq-q" aria-expanded="false">What if I don't like the design? <span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><p>You get revision rounds included. If we can't get it right after those, we refund the deposit minus any work already delivered.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">Do you handle hosting? <span class="plus">+</span></button>
+        <button class="faq-q" aria-expanded="false">Do you handle hosting? <span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><p>We deploy to free or low-cost hosting (GitHub Pages, Netlify, or your existing host). If you want us to manage it, the Care Plan covers that.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q">How fast can you start? <span class="plus">+</span></button>
+        <button class="faq-q" aria-expanded="false">How fast can you start? <span class="plus" aria-hidden="true">+</span></button>
         <div class="faq-a"><p>Usually within 24–48 hours of deposit for Starter and Business plans.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
     <div class="section-head reveal">
@@ -420,19 +503,23 @@
       <p>Tell us about your project. We reply within 24 hours.</p>
     </div>
     <div class="contact-box reveal">
-      <!-- FormSubmit Integration -->
-      <form action="https://formsubmit.co/contact.pixelbridge77@gmail.com" method="POST">
+      <form action="https://formsubmit.co/contact.pixelbridge77@gmail.com" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New WebBridge inquiry" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input type="hidden" name="_template" value="table" />
+
         <div class="field">
           <label for="name">Your name</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="name" required autocomplete="name" />
         </div>
         <div class="field">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
+          <input type="email" id="email" name="email" required autocomplete="email" />
         </div>
         <div class="field">
-          <label for="budget">Budget</label>
+          <label for="budget">Budget (optional)</label>
           <select id="budget" name="budget">
+            <option value="">Prefer not to say</option>
             <option>Under $200</option>
             <option>$200 – $500</option>
             <option>$500 – $1500</option>
@@ -443,44 +530,207 @@
           <label for="message">Project details</label>
           <textarea id="message" name="message" required placeholder="What do you need? Any deadline?"></textarea>
         </div>
+
+        <div class="consent-row">
+          <input type="checkbox" id="consent" name="consent" required />
+          <label for="consent">I agree to the <a href="#privacy">Privacy Policy</a> and consent to WebBridge contacting me about my inquiry.</label>
+        </div>
+
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
         <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
     </div>
   </div>
 </section>
 
+<section id="privacy" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="policy">
+    <h1>Privacy Policy</h1>
+    <p><em>Last updated: January 2025</em></p>
+    <p>WebBridge ("we," "our," or "us") respects your privacy. This notice explains what personal data we collect, why we collect it, and your rights under India's Digital Personal Data Protection Act, 2023 (DPDPA), the EU General Data Protection Regulation (GDPR), and other applicable laws.</p>
+
+    <h2>1. What data we collect</h2>
+    <ul>
+      <li><strong>Contact form:</strong> Name, email address, optional budget range, and project details you submit.</li>
+      <li><strong>Automatic data:</strong> IP address, browser type, device type, and pages visited (only if analytics cookies are accepted).</li>
+    </ul>
+
+    <h2>2. Why we collect it</h2>
+    <ul>
+      <li>To respond to your inquiry and provide quotes.</li>
+      <li>To deliver services you have requested.</li>
+      <li>To improve our website and services.</li>
+    </ul>
+
+    <h2>3. How long we keep it</h2>
+    <p>Inquiry data is retained for up to 12 months after last contact, or as required by law.</p>
+
+    <h2>4. Who we share it with</h2>
+    <p>We use <strong>FormSubmit</strong> to process contact form submissions. We do not sell your personal data. We may share data with service providers who help us operate the website, under confidentiality agreements.</p>
+
+    <h2>5. Your rights</h2>
+    <ul>
+      <li>Access the personal data we hold about you.</li>
+      <li>Request correction of inaccurate data.</li>
+      <li>Request deletion of your data ("right to be forgotten").</li>
+      <li>Withdraw consent at any time.</li>
+      <li>Lodge a complaint with your data protection authority.</li>
+    </ul>
+    <p>To exercise these rights, email <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a>.</p>
+
+    <h2>6. Cookies</h2>
+    <p>See our <a href="#cookies">Cookie Policy</a>.</p>
+
+    <h2>7. Children's data</h2>
+    <p>Our services are not directed to children under 18. We do not knowingly collect data from children. If you believe a child has submitted data, contact us and we will delete it.</p>
+
+    <h2>8. Contact</h2>
+    <p>WebBridge — operated by Aditya Baman, India<br>Email: <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a></p>
+  </div>
+</section>
+
+<section id="terms" style="border-top:1px solid var(--border)">
+  <div class="policy">
+    <h1>Terms of Service</h1>
+    <p><em>Last updated: January 2025</em></p>
+    <p>By using the WebBridge website and services, you agree to these Terms.</p>
+
+    <h2>1. Services</h2>
+    <p>WebBridge provides website design, development, and maintenance services. Specific deliverables, timelines, and pricing are agreed in writing before work begins.</p>
+
+    <h2>2. Payment</h2>
+    <p>50% deposit is required before work begins. The remaining 50% is due on delivery. Accepted methods: PayPal (Goods &amp; Services), Wise, or bank transfer.</p>
+
+    <h2>3. Revisions</h2>
+    <p>Starter plans include 1 revision round. Business plans include 2 rounds. Additional revisions are billed at $25 per round.</p>
+
+    <h2>4. Refunds</h2>
+    <p>See our <a href="#refunds">Refund Policy</a>.</p>
+
+    <h2>5. Intellectual Property</h2>
+    <p>Full ownership of the final website transfers to the client only after final payment. Until then, WebBridge retains all rights.</p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>WebBridge is not liable for loss of revenue, data, or business due to downtime, third-party hosting issues, or client-provided content that infringes copyright. Our total liability is limited to the total fee paid.</p>
+
+    <h2>7. Governing Law</h2>
+    <p>These Terms are governed by the laws of India.</p>
+
+    <h2>8. Contact</h2>
+    <p>Email: <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a></p>
+  </div>
+</section>
+
+<section id="refunds" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="policy">
+    <h1>Refund Policy</h1>
+    <p><em>Last updated: January 2025</em></p>
+    <p>Because website design and development are custom services, refunds are handled as follows:</p>
+
+    <h2>1. Before work begins</h2>
+    <p>If you cancel before we start work, we refund your deposit minus any work already completed.</p>
+
+    <h2>2. After work begins</h2>
+    <p>Once work has begun, the deposit is <strong>non-refundable</strong>. This covers time and resources allocated to your project.</p>
+
+    <h2>3. If we cannot deliver</h2>
+    <p>If WebBridge is unable to deliver the agreed project, we refund your deposit in full.</p>
+
+    <h2>4. How to request a refund</h2>
+    <p>Email <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a> with your order details and reason. We respond within 5 business days.</p>
+
+    <h2>5. Processing time</h2>
+    <p>Approved refunds are processed within 7–14 business days to the original payment method.</p>
+  </div>
+</section>
+
+<section id="cookies" style="border-top:1px solid var(--border)">
+  <div class="policy">
+    <h1>Cookie Policy</h1>
+    <p><em>Last updated: January 2025</em></p>
+    <p>This policy explains how WebBridge uses cookies and similar technologies.</p>
+
+    <h2>1. What are cookies?</h2>
+    <p>Cookies are small text files stored on your device. They help websites remember your preferences and understand how you use the site.</p>
+
+    <h2>2. Cookies we use</h2>
+    <ul>
+      <li><strong>Essential cookies:</strong> Required for the website to function. These cannot be switched off.</li>
+      <li><strong>Analytics cookies:</strong> Help us understand how visitors use the site. Only set if you consent.</li>
+      <li><strong>Marketing cookies:</strong> Used to deliver relevant ads. Only set if you consent.</li>
+    </ul>
+
+    <h2>3. Your choices</h2>
+    <p>You can accept or reject non-essential cookies via the cookie banner that appears on your first visit.</p>
+
+    <h2>4. Managing cookies in your browser</h2>
+    <p>You can also control cookies through your browser settings. Disabling cookies may affect functionality.</p>
+
+    <h2>5. Contact</h2>
+    <p>Email: <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a></p>
+  </div>
+</section>
+
+</main>
+
 <footer>
   <div class="wrap">
+    <div class="footer-links">
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Service</a>
+      <a href="#refunds">Refund Policy</a>
+      <a href="#cookies">Cookie Policy</a>
+    </div>
     <p>© <span id="year"></span> WebBridge. Built with care.</p>
+    <p style="margin-top:6px">WebBridge — operated by Aditya Baman, India</p>
     <p style="margin-top:6px">Email: <a href="mailto:contact.pixelbridge77@gmail.com">contact.pixelbridge77@gmail.com</a></p>
   </div>
 </footer>
 
+<!-- Floating WhatsApp button (replace 919999999999 with your number) -->
+<a class="whatsapp-float" href="https://wa.me/919999999999" target="_blank" rel="noopener" aria-label="Chat with WebBridge on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11 11 0 003.4 17.3L2 22l4.8-1.4a11 11 0 0013.7-17.1zM12 20a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.1-.2 0-.4.1-.5l.4-.5c.1-.1.2-.3.1-.5l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.5.3a2.6 2.6 0 00-.8 1.9c0 1.1.8 2.2.9 2.3.1.2 1.6 2.5 3.9 3.4 1.5.6 2.1.6 2.8.5.4-.1 1.3-.5 1.5-1 .2-.5.2-1 .1-1l-.4-.3z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@silktide/consent-manager@2/dist/silktide-consent-manager.js"></script>
 <script>
-  // Mobile menu
+  window.silktideConsentManager.init({
+    consentTypes: [
+      { id:'essential', label:'Essential', description:'Necessary for the website to function. Cannot be switched off.', required:true },
+      { id:'analytics', label:'Analytics', description:'Help us understand how visitors interact with the website.', defaultValue:false, gtag:'analytics_storage' },
+      { id:'marketing', label:'Marketing', description:'Used to deliver personalized advertisements.', defaultValue:false, gtag:['ad_storage','ad_user_data','ad_personalization'] },
+    ],
+  });
+
   var burger = document.getElementById('burger');
   var navLinks = document.getElementById('navLinks');
   burger.addEventListener('click', function(){
+    var expanded = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', !expanded);
     navLinks.classList.toggle('open');
   });
   navLinks.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+    a.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    });
   });
 
-  // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(function(btn){
     btn.addEventListener('click', function(){
       var item = btn.parentElement;
       var open = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-      if(!open) item.classList.add('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded','false');
+      });
+      if(!open){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
     });
   });
 
-  // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Scroll reveal
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
